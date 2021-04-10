@@ -17,7 +17,9 @@ class Xcodegen < Formula
   depends_on macos: :catalina
 
   def install
-    system "make", "install", "PREFIX=#{prefix}"
+    system "swift", "build", "--disable-sandbox", "-c", "release"
+    bin.install ".build/release/#{name}"
+    pkgshare.install "SettingPresets"
   end
 
   test do
